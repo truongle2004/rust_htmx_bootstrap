@@ -4,6 +4,7 @@ use leptos_router::{
     components::{Route, Router, Routes},
     StaticSegment,
 };
+use crate::application::{LoginFormUseCase, RegisterFormUseCase};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -32,7 +33,6 @@ pub fn App() -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/demo-ssr.css"/>
-        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         // sets the document title
         <Title text="Welcome to Leptos"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
@@ -43,6 +43,8 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("login") view=LoginFormUseCase/>
+                    <Route path=StaticSegment("register") view=RegisterFormUseCase/>
                 </Routes>
             </main>
         </Router>
@@ -59,8 +61,5 @@ fn HomePage() -> impl IntoView {
     view! {
         <h1>"Welcome to Leptos!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
-        <button hx-post="/clicked" hx-swap="outerHTML" class="btn btn-primary">
-            Click Me
-        </button>
     }
 }
