@@ -3,9 +3,7 @@ use leptos_router::hooks::use_navigate;
 
 #[component]
 pub fn LoginFormUseCase() -> impl IntoView {
-    //let (email, set_email) = signal("".to_string());
-    //
-    //let (password, set_password) = signal("".to_string());
+    let error = RwSignal::new("".to_string());
 
     let email_input: NodeRef<Input> = NodeRef::new();
     let password_input: NodeRef<Input> = NodeRef::new();
@@ -37,6 +35,7 @@ pub fn LoginFormUseCase() -> impl IntoView {
                             name="email"
                             aria-describedby="emailHelp"
                             placeholder="Enter your email"
+                            node_ref=email_input
                             required
                         />
                         <div id="emailHelp" class="form-text"></div>
@@ -49,6 +48,7 @@ pub fn LoginFormUseCase() -> impl IntoView {
                             id="exampleInputPassword1"
                             name="password"
                             placeholder="Enter your password"
+                            node_ref=password_input
                             required
                         />
                     </div>
